@@ -17,10 +17,10 @@ taxTools is an R package intended to help with taxonomic data handling, especial
 
 ### Installing
 
-* Download the devtools package, from the RStudio "Install packages" menu or using:
+* Download the devtools package, from the RStudio "Install Packages" menu or using:
 ```
 > install.packages("devtools")
-> library(devtools
+> library(devtools)
 ```
 * Download and install the taxTools package using:
 ```
