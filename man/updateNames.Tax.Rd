@@ -4,16 +4,20 @@
 \alias{updateNames.Tax}
 \title{Update taxonomic names}
 \usage{
-updateNames.Tax(names, validationMatrix, threshold = 0.8, markNoUpdated = TRUE)
+updateNames.Tax(
+	names,
+	validationMatrix,
+	threshold = 0.8,
+	markNoUpdated = TRUE)
 }
 \arguments{
 \item{names}{A vector of type \code{"character"} with the input names to be updated.}
 
 \item{validationMatrix}{A \code{"data.frame"} object obtained from \link[taxTools]{validate.Tax} function.}
 
-\item{threshold}{A number between (0, 1] indicating the proportion of similitude to be considered as the cutoff value for update the input names. In case the validation matrix contains multi-match and more than one name agrees with the threshold criteria, the update will be made using the name with the highest score.}
+\item{threshold}{A number between 0–1 indicating the proportion of similarity to be considered as the cutoff value for updating the input names. If the validation matrix contains multi-matches and more than one name meets the threshold criteria, the updating will be done using the name with the highest score. Default \code{threshold  = 0.8}.}
 
-\item{markNoUpdated}{Boolean indicating if the names that won't be updated must be marked to identify them. When \code{markNoUpdated = TRUE} an * will be added at the end of the name, on the contrary, the names with scores lower than threshold value will keep as is.}
+\item{markNoUpdated}{Boolean indicating whether names that won't be updated should be marked to identify them. When \code{markNoUpdated = TRUE} an * will be added at the end of the name. Conversely, names with scores lower than the threshold value will remain unchanged. Default \code{markNoUpdated  = TRUE}.}
 }
 \description{
 \code{updateNames.Tax} updates the user's input taxonomic names based on a validation matrix.

@@ -17,7 +17,7 @@ taxTools is an R package intended to help with taxonomic data handling, especial
 
 ### Installing
 
-* Download the devtools package, from the RStudio "Install Packages" menu or using:
+* Download the devtools package from the RStudio "Install Packages" menu or using:
 ```
 > install.packages("devtools")
 > library(devtools)
@@ -34,10 +34,6 @@ taxTools is an R package intended to help with taxonomic data handling, especial
 ```
 > validate.Tax
 ```
-* Download the most recent taxonomy from online databases (only working for Amphibians and Reptiles)
-```
-> websearch.Tax
-```
 * Updates the user's input taxonomic names based on a validation matrix
 ```
 > updateNames.Tax
@@ -49,6 +45,8 @@ taxTools is an R package intended to help with taxonomic data handling, especial
 
 ## Version history
 
+* 2.0.0
+    * Some functions were removed
 * 1.0.0
     * Initial release
 

@@ -7,44 +7,38 @@
 validate.Tax(
   names,
   reference,
-  method = c("osa", "lv", "dl", "hamming", "lcs"),
+  method = "osa",
   threshold = 0.8,
   dropMulti = TRUE,
-  ordered = FALSE
-)
+  ordered = FALSE)
 }
 \arguments{
 \item{names}{A vector of type \code{"character"} with the input names to be compared.}
 
-\item{reference}{A vector of type \code{"character"} with the dictionary of reference names. It may be assigned from an user's input database, or from a database retrieved using \link[taxTools]{websearch.Tax}.}
+\item{reference}{A vector of type \code{"character"} with the dictionary of reference names. It must be assigned from an user's input database.}
 
-\item{method}{Method used for string comparison. The available ones are: Optimal String Alignment (\code{method = "osa"}), Levenshtein distance (\code{method = "lv"}), Damerau-Levenshtein distance (\code{method = "dl"}), Hamming distance (\code{method = "hamming"}), and Longest Common Substring (\code{method = "lcs"}). These methods are inherited from the function \link[stringdist]{stringdist}}
+\item{method}{Method used for string comparison. The available ones are: Optimal String Alignment (\code{method = "osa"}), Levenshtein distance (\code{method = "lv"}), Damerau-Levenshtein distance (\code{method = "dl"}), and Hamming distance (\code{method = "hamming"}). These methods are inherited from the function \link[stringdist]{stringdist}. Default \code{method  = "osa"}.}
 
-\item{threshold}{A number between (0, 1] indicating the proportion of similitude to be considered as the cutoff value. The output will show the matching names with scores equal or greater scores than the threshold. Lower threshold values will produce less accurate matches.}
+\item{threshold}{A number between 0–1 indicating the proportion of similarity to be considered as the cutoff value. The output will show the matching names with scores equal to or greater than the threshold. Lower threshold values will produce less accurate matches. Default \code{threshold  = 0.8}.}
 
-\item{dropMulti}{Boolean indicating if the less scored matches for a given name should be dropped in case of multiple matching. By default only the highest scored match is retained (\code{dropMulti = TRUE}). Otherwise (\code{dropMulti = FALSE}), all possible matches are retained and displayed in score descending order (for large data sets it will be more demanding and will take much longer).}
+\item{dropMulti}{Boolean indicating whether low-scored matches for a given name should be dropped in case of multiple matches. By default, only the highest-scored match is retained (\code{dropMulti = TRUE}). Otherwise (\code{dropMulti = FALSE}), all possible matches are retained and displayed in descending order (for large datasets, this will be more demanding and take much longer). Default \code{dropMulti  = TRUE}.}
 
-\item{ordered}{Boolean indicating if the result should be given in alphabetic order (\code{ordered = TRUE}), or like in the user's input (\code{ordered = FALSE}).}
+\item{ordered}{Boolean indicating whether the result should be given in alphabetical order (\code{ordered = TRUE}) or remain in the order of the user's input (\code{ordered = FALSE}). Default \code{ordered  = FALSE}.}
 }
 \value{
-\code{validate.Tax} returns a three columns \code{"data.frame"} object with the user's input names, the best matching names in the reference dictionary, and the string similitude score according to the selected method (a value between 0 and 1, where 0 is totally different and 1 perfect matching).
+\code{validate.Tax} returns a three-columns \code{"data.frame"} object with the user's input names, the best matching names in the reference dictionary, and the string similarity score according to the selected method. The similarity score varies between 0 and 1, where 0 indicates complete dissimilarity and 1 indicates a perfect match.
 }
 \description{
-\code{validate.Tax} computes a string similitude test to compare a vector with user's taxonomic names against a reference dictionary.
+\code{validate.Tax} performs a string similarity test to compare a vector containing the user's taxonomic names against a reference dictionary.
 }
 \details{
-This function inherits some of the string comparison metrics from the \link[stringdist]{stringdist} function.
+This function inherits some string comparison metrics from \link[stringdist]{stringdist}.
 
-\strong{Hamming distance} (\code{method = "hamming"}): counts the number of character substitutions that turns "B" (reference) into "A" (input). It requires both strings have the same length, if not, the distance is \code{Inf}. This method may generate erroneous matching when strings "A" and "B" differ in the number of characters, since "A" will be compared with the "B" strings of the same length, even if they are very quite different. 
+\strong{Hamming distance} (\code{method = "hamming"}): counts the number of character substitutions that turns "B" (reference) into "A" (input). It requires both strings have the same length, if not, the distance is \code{Inf}. 
 
-\strong{Levenshtein distance} (\code{method = "lv"}): counts the number of deletions, insertions and substitutions necessary to turn "B" into "A".
+\strong{Levenshtein distance} (\code{method = "lv"}): counts the number of deletions, insertions, and substitutions necessary to turn "B" into "A".
 
-\strong{Optimal String Alignment} (\code{method = "osa"}): is like the Levenshtein distance but also allows transposition of adjacent characters. Each character may be edited only once (for example, a character cannot be transposed twice to move it forward in the string).
+\strong{Optimal String Alignment} (\code{method = "osa"}): like the Levenshtein distance but allowing the transposition of adjacent characters (once by character).
 
-\strong{Damerau-Levenshtein distance} (\code{method = "dl"}): is like the Optimal String Alignment distance except that it allows for multiple edits on characters.
-
-For a more detailed description of these metrics see \href{https://journal.r-project.org/archive/2014-1/loo.pdf}{van der Loo (2014)}.
-}
-\references{
-van der Loo, M. P. J. (2014). The \code{stringdist} Package for Approximate String Matching. \emph{The R Journal}, 6(1): 111-122.
+\strong{Damerau-Levenshtein distance} (\code{method = "dl"}): like the Optimal String Alignment distance except that it allows for multiple transpositions of characters.
 }
